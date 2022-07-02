@@ -1,2 +1,2 @@
 # DSA
-This repo contain codes of concepts I am learning in DSA.
+This repo contain codes of concepts that I am learning in DSA.
