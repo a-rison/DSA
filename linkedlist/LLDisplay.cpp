@@ -115,6 +115,43 @@ int RMax(struct Node *p) // recursive method
     }
 }
 
+struct Node *LSearch2(struct Node *p, int key)
+{
+    Node *q = NULL;
+    while (p != NULL)
+    {
+        if (p->data == key)
+        {
+            q->next = p->next;
+            p->next = first;
+            first = p;
+        }
+        q = p;
+        p = p->next;
+    }
+}
+
+struct Node *LSearch(struct Node *p, int key)
+{
+    while (p != NULL)
+    {
+        if (key == p->data)
+            return p;
+        p = p->next;
+    }
+    return NULL;
+}
+
+struct Node *RSearch(struct Node *p, int key)
+{
+    if (p == NULL)
+        return NULL;
+    if (p->data == key)
+        return p;
+    else
+        return RSearch(p->next, key);
+}
+
 int main()
 {
     int a[] = {3, 4, 5, 6, 7, 8, 12, 56};
@@ -135,6 +172,13 @@ int main()
     cout << "Sum of all nodes: " << Rsum(first) << endl;
 
     cout << "Max number is: " << Max(first) << endl;
+
+    struct Node *temp;
+    temp = LSearch(first, 25);
+    if (temp)
+        cout << "Key is found " << temp->data;
+    else
+        cout << "Key is not found";
 
     return 0;
 }
