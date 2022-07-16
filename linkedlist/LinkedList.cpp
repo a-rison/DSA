@@ -152,6 +152,31 @@ struct Node *RSearch(struct Node *p, int key)
         return RSearch(p->next, key);
 }
 
+void insert(int pos, int x)
+{
+    Node *t, *p;
+    if (pos == 0)
+    {
+        t = new Node;
+        t->data = x;
+        t->next = first;
+        first = t;
+    }
+    else
+    {
+        p = first;
+        for (int i = 0; i < pos; i++)
+            p = p->next;
+        if (p)
+        {
+            t = new Node;
+            t->data = x;
+            t->next = p->next;
+            p->next = t;
+        }
+    }
+}
+
 int main()
 {
     int a[] = {3, 4, 5, 6, 7, 8, 12, 56};
