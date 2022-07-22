@@ -5,7 +5,7 @@ struct Node
 {
     int data;
     struct Node *next;
-} *first = NULL;
+} *first = NULL, *second = NULL, *third = NULL;
 
 void create(int A[], int n)
 {
@@ -15,6 +15,25 @@ void create(int A[], int n)
     first->data = A[0];
     first->next = NULL;
     last = first;
+
+    for (i = 1; i < n; i++)
+    {
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+
+void create2(int A[], int n)
+{
+    int i;
+    struct Node *t, *last;
+    second = (struct Node *)malloc(sizeof(struct Node));
+    second->data = A[0];
+    second->next = NULL;
+    last = second;
 
     for (i = 1; i < n; i++)
     {
@@ -317,64 +336,85 @@ void Reverse3(struct Node *q, struct Node *p)
     }
 }
 
-int main()
+void Concat(struct Node *p, struct Node *q)
 {
+    third = p;
 
-    // create(a, 8);
-    //  display(first);
-
-    // cout << "Recursive display: " << endl;
-    // Rdisplay(first);
-    // cout << endl;
-
-    // cout << "Reverse recursive display: " << endl;
-    // RRdisplay(first);
-    // cout << endl;
-
-    // cout << "Number of nodes: " << Rcount(first) << endl;
-
-    // cout << "Sum of all nodes: " << Rsum(first) << endl;
-
-    // cout << "Max number is: " << Max(first) << endl;
-
-    // struct Node *temp;
-    // temp = LSearch(first, 25);
-    // if (temp)
-    //     cout << "Key is found " << temp->data << endl;
-    // else
-    //     cout << "Key is not found" << endl;
-
-    // insert(first, 8, 10);
-
-    // display(first);
-
-    int A[] = {10, 10, 10, 20, 30, 30, 40, 50};
-    create(A, 5);
-
-    // Inserted in a sorted linked list
-    SortedInsert(first, 25);
-    display(first);
-
-    // Deleting element
-    cout << "Deleted element: " << Delete(first, 1) << endl;
-    display(first);
-
-    // Checking if linked list is sorted or not
-    if (isSorted(first))
+    while (p->next != NULL)
     {
-        cout << "Sorted" << endl;
+        p = p->next;
+    }
+    p->next = q;
+}
+
+void Merge(struct Node *p, struct Node *q)
+{
+    struct Node *last;
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        third->next = NULL;
     }
     else
     {
-        cout << "Not Sorted" << endl;
+        third = last = q;
+        q = q->next;
+        third->next = NULL;
     }
+    while (p && q)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p)
+        last->next = p;
+    if (q)
+        last->next = q;
+}
 
-    // Removing Duplicate from a linked list
-    RemoveDuplicate(first);
-    display(first);
+int isLoop(struct Node *f)
+{
+    struct Node *p,*q;
+    p=q=f;
 
-    Reverse1(first);
-    display(first);
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q!=NULL?q=q->next:q;
+    }while(p && q && p != q);
+
+    if(p==q)
+        return 1;
+    else
+        return 0;
+}
+
+int main()
+{
+    struct Node *t1, *t2;
+
+    int A[] = {10, 20, 30, 40, 50};
+    create(A,5);
+
+    t1=first->next->next;
+    t2=first->next->next->next->next;
+    t2->next = t1;
+
+    cout << isLoop(first) << endl;
 
     return 0;
 }
