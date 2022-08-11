@@ -83,6 +83,51 @@ void Insert(struct Node *p, int index, int x)
     }
 }
 
+int Delete(struct Node *p, int index)
+{
+    struct Node *q;
+    int x = -1, i;
+
+    if(index <1 || index > Length(p))
+        return -1;
+
+    if(index == 1)
+    {
+        q = p;
+        first = first->next;
+        if(first) first->prev = NULL;
+        x = q->data;
+        delete q;
+    }
+    else
+    {
+        q = p;
+        for(i=0;i<index-1;i++)
+            q=q->next;
+        
+        q->prev->next = q->next;
+        if(q->next) q->next->prev = q->prev;
+        x = q->data;
+        delete q;
+    }
+    return x;
+}
+
+void Reverse(struct Node *p)
+{
+    struct Node *temp;
+
+    while(p)
+    {
+        temp = p->next;
+        p->next = p->prev;
+        p->prev = temp;
+        p = p->prev;
+        if(p != NULL && p->next == NULL)
+            first = p;
+    }
+}
+
 int main()
 {
     int A[] = {10,20,30,40,50};
@@ -90,7 +135,11 @@ int main()
 
     Insert(first,5,25);
 
+    Delete(first,2);
+
     cout << "Length is: " << Length(first) << endl;
+
+    Reverse(first);
 
     Display(first);
 

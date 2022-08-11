@@ -42,23 +42,7 @@ void setIO()
 #endif
 }
 void solve() {
-	ll n;
-	cin >> n;
-	map<ll,ll> m;
-	for(ll i=0;i<n;++i)
-	{
-		ll x;
-		cin >> x;
-		m[x]++;
-	}
-	for(auto &pr: m)
-	{
-		if(pr.first != pr.second){
-			cout << "no" << endl;
-			return;
-		}
-	}
-	cout << "yes" << endl;
+	
 
 }
 int main()
