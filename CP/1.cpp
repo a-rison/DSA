@@ -42,6 +42,9 @@ void setIO()
 #endif
 }
 void solve() {
+	string str1, str2;
+	cin >> str1;
+	cin >> str2;
 	
 
 }
