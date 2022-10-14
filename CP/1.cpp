@@ -45,8 +45,25 @@ void solve() {
 	string str1, str2;
 	cin >> str1;
 	cin >> str2;
-	
 
+	map<char,int> m;
+	for(unsigned int i=0;i<str1.length();i++)
+	{
+		m[str1[i]]++;
+	}
+	for(unsigned int i=0;i<str2.length();i++)
+	{
+		m[str2[i]]++;
+	}
+	for(auto &pr: m)
+	{
+		if(pr.second % 2 != 0)
+		{
+			cout << "sad" << endl;
+			return;
+		}
+	}
+	cout << "happy" << endl;
 }
 int main()
 {
