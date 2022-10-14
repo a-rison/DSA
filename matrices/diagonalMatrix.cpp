@@ -2,9 +2,11 @@
 using namespace std;
 
 class Diagonal {
+    
     private:
     int n;
     int *A;
+
     public:
     Diagonal() {
         n = 2;
