@@ -22,7 +22,7 @@ void push(char x)
     }
 }
 
-int pop()
+char pop()
 {
     struct Node *t;
     char x = -1;
@@ -50,23 +50,23 @@ void Display()
     cout << endl;
 }
 
+//Parenthesis matching code
 int isBalanced(char *exp)
 {
     int i;
 
-    for (i = 0; exp[i] != '\0';++i)
+    for (int i = 0; exp[i] != '\0'; i++)
     {
-        if(exp[i]=='(')
+        if(exp[i] == '(')
             push(exp[i]);
-        else if(exp[i]==')')
+        else if(exp[i] == ')')
         {
-            if(top==NULL)
+            if(top == NULL)
                 return 0;
             pop();
         }
     }
-
-    if(top==NULL)
+    if(top == NULL)
         return 1;
     else
         return 0;
@@ -74,7 +74,7 @@ int isBalanced(char *exp)
 
 int main()
 {
-    char exp[] = "((a+b)*(c-d))";
+    char *exp = "((a+b)*(c-d))";
 
     cout << isBalanced(exp) << endl;
 

@@ -42,28 +42,26 @@ void setIO()
 #endif
 }
 void solve() {
-	string str1, str2;
-	cin >> str1;
-	cin >> str2;
+	int n;
+	cin >> n;
+	int a[n];
+	int b[n];
+	ll ans = 0;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+		ans += a[i];
+	}
+	int mx = INT_MIN;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> b[i];
+		ans += b[i];
+		mx = max(mx, b[i]);
+	}
 
-	map<char,int> m;
-	for(unsigned int i=0;i<str1.length();i++)
-	{
-		m[str1[i]]++;
-	}
-	for(unsigned int i=0;i<str2.length();i++)
-	{
-		m[str2[i]]++;
-	}
-	for(auto &pr: m)
-	{
-		if(pr.second % 2 != 0)
-		{
-			cout << "sad" << endl;
-			return;
-		}
-	}
-	cout << "happy" << endl;
+	cout << ans - mx << endl;
+
 }
 int main()
 {
