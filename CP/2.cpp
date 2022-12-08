@@ -1,11 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define YES cout << "YES" << endl
-#define NO cout << "NO" << endl
-#define Yes cout << "Yes" << endl
-#define yes cout << "yes" << endl
-#define No cout << "No" << endl
-#define no cout << "no" << endl
 #define ll long long int
 #define ld long double
 #define mp make_pair
@@ -41,8 +35,44 @@ void setIO()
 	freopen("output.txt", "w", stdout);
 #endif
 }
-void solve() {
+
+void solve()
+{
+	int n, x=0,y=0;
+	cin >> n;
+
+	string s;
+	cin >> s;
 	
+	for (int i = 0; i < n; i++)
+	{
+		for(int j = i;j < n; j++)
+		{
+			for(int k=i; k<=j; j++)
+			{
+				if(s[k] == '0')
+					x++;
+				else
+					y++;
+			}
+			if(x == 0)
+				cout << pow(y,2) << endl;
+			else if(y == 0)
+				cout << pow(x,2) << endl;
+			else
+		}
+	}
+
+	if(x>=y)
+	{
+		cout << round(pow(x, 2)) << endl;
+		return;
+	}
+	else
+	{
+		cout << round(pow(y, 2)) << endl;
+		return;
+	}
 }
 int main()
 {

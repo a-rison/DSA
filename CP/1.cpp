@@ -1,20 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define YES cout << "YES" << endl
-#define NO cout << "NO" << endl
-#define Yes cout << "Yes" << endl
-#define yes cout << "yes" << endl
-#define No cout << "No" << endl
-#define no cout << "no" << endl
-#define ll long long int
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rev(i,a,b) for(int i=a;i>=b;i--)
+#define arr(a,n) rep(i,0,n) cin>>a[i]
+#define int long long
 #define ld long double
 #define mp make_pair
-#define loop(a, b, i) for (ll i = a; i < b; i++)
-#define loop1(a, b, i) for (ll i = a; i > b; i--)
-#define For(i, n) loop(0, n, i)
-#define Fori(i, n) loop1(n, -1, i)
 #define w(t)  \
-    ll t;     \
+	int t;		\
+    //ll t;     \
     cin >> t; \
     while (t--)
 #define mod 1000000007
@@ -41,27 +35,32 @@ void setIO()
 	freopen("output.txt", "w", stdout);
 #endif
 }
+
 void solve() {
 	int n;
-	cin >> n;
-	int a[n];
-	int b[n];
-	ll ans = 0;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> a[i];
-		ans += a[i];
-	}
-	int mx = INT_MIN;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> b[i];
-		ans += b[i];
-		mx = max(mx, b[i]);
-	}
+	string s;
+	cin >> n >> s;
 
-	cout << ans - mx << endl;
-
+	int cnt0 = 0, cnt1 = 0;
+	rep(i,0,n)
+	{
+		cnt0 += s[i] == '0';
+		cnt1 += s[i] == '1';
+	}
+	int ans = cnt1 * cnt0;
+	int lg = 1;
+	rep(i,1,n)
+	{
+		if(s[i] == s[i-1])
+			lg++;
+		else
+		{
+			ans = max(ans, lg * lg);
+			lg = 1;
+		}
+	}
+	ans = max(ans, lg * lg);
+	cout << ans << "\n";
 }
 int main()
 {
