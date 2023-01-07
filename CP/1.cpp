@@ -1,14 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define rep(i,a,b) for(int i=a;i<b;i++)
-#define rev(i,a,b) for(int i=a;i>=b;i--)
-#define arr(a,n) rep(i,0,n) cin>>a[i]
-#define int long long
+#define ll long long int
 #define ld long double
 #define mp make_pair
+#define loop(a, b, i) for (ll i = a; i < b; i++)
+#define loop1(a, b, i) for (ll i = a; i > b; i--)
+#define For(i, n) loop(0, n, i)
+#define Fori(i, n) loop1(n, -1, i)
 #define w(t)  \
-	int t;		\
-    //ll t;     \
+    ll t;     \
     cin >> t; \
     while (t--)
 #define mod 1000000007
@@ -36,31 +36,31 @@ void setIO()
 #endif
 }
 
-void solve() {
+void solve()
+{
 	int n;
-	string s;
-	cin >> n >> s;
+	cin >> n;
+	vector<int> v(1001);
+	int maxno = INT_MIN;
 
-	int cnt0 = 0, cnt1 = 0;
-	rep(i,0,n)
-	{
-		cnt0 += s[i] == '0';
-		cnt1 += s[i] == '1';
+	for (int i = 1; i <= n; i++) {
+		int temp;
+		cin >> temp;
+		v[temp] = i;
 	}
-	int ans = cnt1 * cnt0;
-	int lg = 1;
-	rep(i,1,n)
-	{
-		if(s[i] == s[i-1])
-			lg++;
-		else
-		{
-			ans = max(ans, lg * lg);
-			lg = 1;
+	for (int i = 1; i <= 1000; i++) {
+		for (int j = 1; j <= 1000; j++) {
+			if (v[i] && v[j] && int(__gcd(i, j)) == 1) {
+				maxno = max(maxno, (v[i] + v[j]));
+			}
 		}
 	}
-	ans = max(ans, lg * lg);
-	cout << ans << "\n";
+	if(maxno>0){
+		cout << maxno << endl;
+		return;
+	}
+	cout << -1 << endl;
+	return;
 }
 int main()
 {

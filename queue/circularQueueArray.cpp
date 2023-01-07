@@ -12,17 +12,18 @@ struct Queue
 
 void create(struct Queue *q, int size)
 {
+    q->size = size;
     q->Q = new int[size];
     q->front = q->rear = 0;
 }
 
 void enqueue(struct Queue *q, int x)
 {
-    if((q->(rear+1))%q->size == q->front)
+    if((q->rear+1)%q->size == q->front)
         cout << "Queue is full" << endl;
     else
     {
-        q->rear = (q->(rear+1))%q->size;
+        q->rear = (q->rear+1)%q->size;
         q->Q[q->rear] = x;
     }
 }
@@ -34,7 +35,7 @@ int dequeue(struct Queue *q)
         cout << "Queue is empty" << endl;
     else
     {
-        q->front = q->(front + 1) % q->size;
+        q->front = (q->front + 1) % q->size;
         x = q->Q[q->front];
     }
     return x;
@@ -47,16 +48,15 @@ void Display(struct Queue q)
     {
         cout << q.Q[i];
         i = (i + 1) % q.size;
-    } while (i != (q->rear + 1 % q.size));
+    } while (i != (q.rear + 1) % q.size);
     cout << endl;
 }
 
 int main()
 {
     struct Queue q;
-    cout << "Enter the size of queue: ";
-    cin >> q.size;
-    create(&q, q.size);
+    
+    create(&q, 5);
 
     enqueue(&q, 10);
     enqueue(&q, 20);

@@ -12,6 +12,7 @@ struct Queue
 
 void create(struct Queue *q, int size)
 {
+    q->size = size;
     q->Q = new int[size];
     q->front = q->rear = -1;
 }
